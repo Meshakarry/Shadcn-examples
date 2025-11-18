@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "module": "CommonJS",       // Jest runs in Node CJS
+    "esModuleInterop": true,    // allow default imports from CJS
+    "verbatimModuleSyntax": false,
+    "lib": ["dom", "esnext"],
+		"types": ["jest", "node"],
+  },
+  "include": ["tests", "src"]
+}
