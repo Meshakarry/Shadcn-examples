@@ -16,11 +16,14 @@ import {
   SettingsIcon,
   SquareActivityIcon,
   TriangleAlertIcon,
+  Info,
   TruckIcon,
   TwitterIcon,
   Eye,
+  Search,
   Undo2Icon,
-  UsersIcon
+  UsersIcon,
+  Plus
 } from 'lucide-react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -35,19 +38,49 @@ import {
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuBadge,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger
 } from '@/components/ui/sidebar'
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+} from "@/components/ui/field"
+
+import {
+  InputGroup,
+  InputGroupAddon,
+  // InputGroupButton,
+  InputGroupInput,
+  // InputGroupText,
+  // InputGroupTextarea,
+} from "@/components/ui/input-group"
 
 import LanguageDropdown from '@/components/blocks/dropdown-language'
 import ProductInsightsCard from '@/components/blocks/widget-product-insights'
@@ -56,6 +89,7 @@ import SalesMetricsCard from '@/components/blocks/chart-sales-metrics'
 import StatisticsCard from '@/components/blocks/statistics-card-01'
 import TotalEarningCard from '@/components/blocks/widget-total-earning'
 import TransactionDatatable, { type Item } from '@/components/blocks/datatable-transaction'
+import { Switch } from './components/ui/switch'
 
 // Statistics card data
 const StatisticsCardData = [
@@ -572,8 +606,11 @@ const DashboardShell = () => {
               <Card className='col-span-full w-full py-0'>
                 <TransactionDatatable data={transactionData} />
               </Card>
+            </div>
 
-              <div className="grid gap-8 md:grid-cols-2">
+            {/* ADD A POSSIBILITY TO HAVE ROUNDED BUTTON AND ICON VARIANT WITH THE SIZES RANGE(xs, sm, default, lg) */}
+
+            <div className="my-3 grid gap-8 md:grid-cols-2">
                 {/* Sizes */}
                 <div className="rounded-2xl border p-6 space-y-4">
                   <h2 className="text-lg font-semibold">Button Sizes</h2>
@@ -621,7 +658,128 @@ const DashboardShell = () => {
                     <Button variant="ghost" disabled>Ghost</Button>
                   </div>
                 </div>
-              </div>
+            </div>
+
+            <div className="flex items-center justify-between px-4">
+              <InputGroup className="max-w-80">
+                <InputGroupInput placeholder="Search by name or email" />
+                <InputGroupAddon>
+                  <Search />
+                </InputGroupAddon>
+              </InputGroup>
+
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button size="sm">
+                    <Plus />
+                    Add Collaboration
+                  </Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Add Collaboration</SheetTitle>
+                    {/* <SheetDescription>
+                      Make changes to your profile here. Click save when you&apos;re done.
+                    </SheetDescription> */}
+                  </SheetHeader>
+                  {/* tried */}
+                  <div className="flex flex-col gap-3.5 flex-1">
+                    <div>
+                      <h4 className="mb-4 font-bold text-xl leading-tight">Add new Collaboration</h4>
+                      <p className="text-neutral-600 text-sm">
+                        Enter the collaboration details below to create a new record. Ensure all information is correct before saving.
+                      </p>
+                    </div>
+
+                    <form>
+                      <FieldGroup className="flex flex-col flex-1 gap-3.5">
+                        <Field>
+                          <InputGroup>
+                            <InputGroupInput placeholder="Active" required />
+                            <InputGroupAddon align="inline-end">
+                              <Switch />
+                            </InputGroupAddon>
+                          </InputGroup>
+                        </Field>
+
+                        <Field>
+                          <FieldLabel htmlFor="project">
+                            <span>Project Name</span>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button variant="link" className="rounded-full w-3 h-3" size="icon">
+                                  <Info />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>This is content in a tooltip.</TooltipContent>
+                            </Tooltip>
+                          </FieldLabel>
+
+                          <Input
+                            id="project"
+                            placeholder="Evil Rabbit"
+                            required
+                          />
+                        </Field>
+
+                        <FieldGroup className="grid grid-cols-2 gap-6">
+                          <Field>
+                            <FieldLabel htmlFor="front-desk-phone">
+                              <span>Front desk Phone Number</span>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button variant="link" className="rounded-full w-3 h-3" size="icon">
+                                    <Info />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>This is content in a tooltip.</TooltipContent>
+                              </Tooltip>
+                            </FieldLabel>
+
+                            <Input
+                              id="front-desk-phone"
+                              placeholder="Evil Rabbit"
+                              required
+                            />
+                          </Field>
+
+                          <Field>
+                            <FieldLabel htmlFor="front-desk-email">
+                              <span>Front desk Email</span>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button variant="link" className="rounded-full w-3 h-3" size="icon">
+                                    <Info />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>This is content in a tooltip.</TooltipContent>
+                              </Tooltip>
+                            </FieldLabel>
+
+                            <Input
+                              id="front-desk-email"
+                              placeholder="Evil Rabbit"
+                              required
+                              type="email"
+                            />
+                          </Field>
+                        </FieldGroup>
+                      </FieldGroup>
+                    </form>
+                  </div>
+                  <SheetFooter>
+                    <SheetClose asChild>
+                      <Button variant="outline">
+                        Cancel
+                      </Button>
+                    </SheetClose>
+
+                    <Button type="submit">
+                      Add
+                    </Button>
+                  </SheetFooter>
+                </SheetContent>
+              </Sheet>
             </div>
           </main>
           <footer>

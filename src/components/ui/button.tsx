@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
   `
-    cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm tracking-wider font-medium rounded-lg transition-colors
+    cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium rounded-lg transition-colors
     focus-visible:outline-none focus:ring-3 focus:ring-primary-200
     disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed
     [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:pointer-events-none
@@ -19,16 +19,16 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary-500",
         outline:
-          "border border-neutral-300 text-foreground shadow-xs bg-white/10 hover:bg-black/5 hover:shadow-sm focus:border-neutral-400",
+          "outline outline-neutral-300 text-foreground shadow-xs bg-white/10 hover:bg-black/5 hover:shadow-sm focus:outline-neutral-400",
         link: "text-neutral-700 hover:bg-black/5 focus:bg-transparent",
         destructive:
           "bg-destructive text-white focus:ring-ring",
-        ghost: "border border-neutral-50 text-neutral-700 hover:text-foreground hover:bg-black/5 hover:border-transparent focus:text-neutral-700 focus:bg-transparent focus:border-transparent",
+        ghost: "outline outline-neutral-50 text-neutral-700 hover:text-foreground hover:bg-black/5 hover:outline-transparent focus:text-neutral-700 focus:bg-transparent",
       },
       size: {
         default: "px-4 py-2",
-        xs: "px-2 py-1 text-xs font-normal",
-        sm: "py-1.5 px-3",
+        xs: "px-2 py-1 text-xs font-normal gap-1.5 [&_svg]:size-3.5",
+        sm: "py-1.5 px-3 gap-1.5 [&_svg]:size-3.5",
         lg: "px-6 py-2.5",
         icon: "h-9 w-9",
       },
