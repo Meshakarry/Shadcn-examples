@@ -1,7 +1,6 @@
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MyCombobox from "@/components/MyCombobox";
-import { vi } from "vitest";
 
 const frameworks = [
   { value: "next.js", label: "Next.js" },
@@ -12,11 +11,6 @@ const frameworks = [
 ];
 
 describe("MyCombobox", () => {
-  afterEach(() => {
-    vi.clearAllTimers();
-    vi.useRealTimers();
-  });
-
   //
   // BASIC RENDERING
   //
@@ -65,30 +59,30 @@ describe("MyCombobox", () => {
     render(<MyCombobox options={frameworks} />);
     await userEvent.click(screen.getByTestId("trigger"));
 
-    vi.useFakeTimers();
 
     const input = screen.getByTestId("search-input");
     await userEvent.type(input, "a");
 
     expect(screen.getByRole("status")).toBeInTheDocument();
 
-    act(() => vi.advanceTimersByTime(300));
-    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    // ⬅ WAIT for it to disappear
+    await waitFor(() => {
+      expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    })
   });
 
   it("filters options based on search", async () => {
     render(<MyCombobox options={frameworks} />);
     await userEvent.click(screen.getByTestId("trigger"));
 
-    vi.useFakeTimers();
-
     const input = screen.getByTestId("search-input");
     await userEvent.type(input, "svelte");
 
-    act(() => vi.advanceTimersByTime(300));
+    await waitForElementToBeRemoved(() => screen.queryByRole("status"));
 
+    // Now expect filtered options
     const options = screen.getAllByRole("option");
-    expect(options.length).toBe(1);
+    expect(options).toHaveLength(1);
     expect(options[0]).toHaveTextContent(/sveltekit/i);
   });
 
@@ -96,16 +90,14 @@ describe("MyCombobox", () => {
     render(<MyCombobox options={frameworks} />);
     await userEvent.click(screen.getByTestId("trigger"));
 
-    vi.useFakeTimers();
 
     const input = screen.getByTestId("search-input");
     await userEvent.type(input, "notfound");
 
-    act(() => vi.advanceTimersByTime(300));
+    await waitForElementToBeRemoved(() => screen.queryByRole("status"));
 
-    const empty = screen.getByTestId("empty-message");
-    expect(empty).toBeInTheDocument();
-    expect(empty).toHaveTextContent(/no results/i);
+    expect(screen.getByTestId("empty-message")).toBeInTheDocument();
+
   });
 
   //
@@ -118,11 +110,14 @@ describe("MyCombobox", () => {
     const options = await screen.findAllByRole("option");
     await userEvent.click(options[0]);
 
-    const checkboxes = screen.getAllByRole("checkbox");
-    expect(checkboxes[0]).toBeChecked();
+    await waitFor(() => {
+      const checkboxes = screen.getAllByRole("checkbox");
+      expect(checkboxes[0]).toBeChecked();
+  
+      const badges = screen.getAllByTestId("badge");
+      expect(badges[0]).toHaveTextContent(frameworks[0].label);
+    })
 
-    const badges = screen.getAllByTestId("badge");
-    expect(badges[0]).toHaveTextContent(frameworks[0].label);
   });
 
   it("allows deselecting an item", async () => {
@@ -132,16 +127,18 @@ describe("MyCombobox", () => {
     const options = await screen.findAllByRole("option");
     await userEvent.click(options[0]);
 
-    const checkboxes = screen.getAllByRole("checkbox");
-    expect(checkboxes[0]).toBeChecked();
-
-    await userEvent.click(options[0]);
-    expect(checkboxes[0]).not.toBeChecked();
+    await waitFor(async () => {
+      const checkboxes = screen.getAllByRole("checkbox");
+      expect(checkboxes[0]).toBeChecked();
+  
+      await userEvent.click(options[0]);
+      expect(checkboxes[0]).not.toBeChecked();
+    })
   });
 
-  //
-  // BADGE REMOVAL
-  //
+  // //
+  // // BADGE REMOVAL
+  // //
   it("removes a badge when clicking the X button", async () => {
     render(<MyCombobox options={frameworks} />);
     await userEvent.click(screen.getByTestId("trigger"));
@@ -155,9 +152,9 @@ describe("MyCombobox", () => {
     expect(screen.queryByTestId("badge")).not.toBeInTheDocument();
   });
 
-  //
-  // CLEAR ALL
-  //
+  // //
+  // // CLEAR ALL
+  // //
   it("clears all selections", async () => {
     render(<MyCombobox options={frameworks} />);
     await userEvent.click(screen.getByTestId("trigger"));

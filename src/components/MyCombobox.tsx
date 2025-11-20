@@ -26,42 +26,32 @@ export default function MultiSelectCombobox({
     const [loading, setLoading] = useState(false);
     const [filteredOptions, setFilteredOptions] = useState(options);
 
-    // simulate search delay
     useEffect(() => {
-
-      const search = async () => {
-        setLoading(true);
-
-        const mockSearch = async (value: string): Promise<Option[]> =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              const res = options.filter((option) => option.value.includes(value));
-              resolve(res);
-            }, 1000);
-          });
-
-        const results = await mockSearch(query);
-        setFilteredOptions(results);
-        setLoading(false);
+      let active = true;
+      setLoading(true);
+    
+      const fetchData = async () => {
+        const result = await new Promise<Option[]>((resolve) =>
+          setTimeout(() => {
+            resolve(
+              options.filter((o) =>
+                o.value.toLowerCase().includes(query.toLowerCase())
+              )
+            );
+          }, 1000)
+        );
+    
+        if (active) {
+          setFilteredOptions(result);
+          setLoading(false);
+        }
       };
-
-
-      search();
-      //   const results = await mockSearch(query); 
-      // const mockSearch = async (value: string): Promise<Option[]> => {
-      //   return new Promise((resolve) => {
-      //     setTimeout(() => {
-      //       const res = options.filter((option) => option.value.includes(value));
-      //       console.log(res, 'res');
-      //       resolve(res);
-      //     }, 1000);
-      //   });
-      // };
-      // setLoading(true);
-      // mockSearch(query);
-      // setLoading(false);
-      // const timeout = setTimeout(() => setLoading(false), 300);
-      // return () => clearTimeout(timeout);
+    
+      fetchData();
+    
+      return () => {
+        active = false;
+      };
     }, [query, options]);
 
     const toggleSelection = (value: string) => {
