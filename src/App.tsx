@@ -645,6 +645,59 @@ const DashboardShell = () => {
                   </div>
                 </div>
 
+                {/* Icon only variants */}
+                <div className="rounded-2xl border p-6 space-y-4">
+                  <h2 className="text-lg font-semibold">Icon only</h2>
+
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button size="xs" iconOnly><Eye /></Button>
+                    <Button size="sm" iconOnly><Eye /></Button>
+                    <Button size="default" iconOnly><Eye /></Button>
+                    <Button size="lg" iconOnly><Eye /></Button>
+
+                    <Button size="xs" iconOnly pill><Eye /></Button>
+                    <Button size="sm" iconOnly pill><Eye /></Button>
+                    <Button size="default" iconOnly pill><Eye /></Button>
+                    <Button size="lg" iconOnly pill><Eye /></Button>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border p-6 space-y-4">
+                  <h2 className="text-lg font-semibold">Icon only</h2>
+
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button size="xs" pill>Rounded extra small</Button>
+                    <Button size="sm" pill>Rounded small</Button>
+                    <Button pill>Rounded default</Button>
+                    <Button size="lg" pill>Rounded large</Button>
+
+                    <Button size="xs" variant="secondary" pill>Rounded extra small</Button>
+                    <Button size="sm" variant="secondary" pill>Rounded small</Button>
+                    <Button variant="secondary" pill>Rounded default</Button>
+                    <Button size="lg" variant="secondary" pill>Rounded large</Button>
+
+                    <Button size="xs" variant="outline" pill>Rounded extra small</Button>
+                    <Button size="sm" variant="outline" pill>Rounded small</Button>
+                    <Button variant="outline" pill>Rounded default</Button>
+                    <Button size="lg" variant="outline" pill>Rounded large</Button>
+
+                    <Button size="xs" variant="link" pill>Rounded extra small</Button>
+                    <Button size="sm" variant="link" pill>Rounded small</Button>
+                    <Button variant="link" pill>Rounded default</Button>
+                    <Button size="lg" variant="link" pill>Rounded large</Button>
+
+                    <Button size="xs" variant="destructive" pill>Rounded extra small</Button>
+                    <Button size="sm" variant="destructive" pill>Rounded small</Button>
+                    <Button variant="destructive" pill>Rounded default</Button>
+                    <Button size="lg" variant="destructive" pill>Rounded large</Button>
+
+                    <Button size="xs" variant="ghost" pill>Rounded extra small</Button>
+                    <Button size="sm" variant="ghost" pill>Rounded small</Button>
+                    <Button variant="ghost" pill>Rounded default</Button>
+                    <Button size="lg" variant="ghost" pill>Rounded large</Button>
+                  </div>
+                </div>
+
                 {/* Variants disabled */}
                 <div className="rounded-2xl border p-6 space-y-4">
                   <h2 className="text-lg font-semibold">Variants disabled</h2>
@@ -682,7 +735,7 @@ const DashboardShell = () => {
                       Make changes to your profile here. Click save when you&apos;re done.
                     </SheetDescription> */}
                   </SheetHeader>
-                  {/* tried */}
+                  {/* try to make this globally accessible(this flex-1 wrapper should somehow appears inside SheetBody) */}
                   <div className="flex flex-col gap-3.5 flex-1">
                     <div>
                       <h4 className="mb-4 font-bold text-xl leading-tight">Add new Collaboration</h4>
@@ -707,7 +760,7 @@ const DashboardShell = () => {
                             <span>Project Name</span>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <Button variant="link" className="rounded-full w-3 h-3" size="icon">
+                                <Button variant="link">
                                   <Info />
                                 </Button>
                               </TooltipTrigger>
@@ -728,7 +781,7 @@ const DashboardShell = () => {
                               <span>Front desk Phone Number</span>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <Button variant="link" className="rounded-full w-3 h-3" size="icon">
+                                  <Button variant="link">
                                     <Info />
                                   </Button>
                                 </TooltipTrigger>
@@ -748,7 +801,7 @@ const DashboardShell = () => {
                               <span>Front desk Email</span>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <Button variant="link" className="rounded-full w-3 h-3" size="icon">
+                                  <Button variant="link">
                                     <Info />
                                   </Button>
                                 </TooltipTrigger>

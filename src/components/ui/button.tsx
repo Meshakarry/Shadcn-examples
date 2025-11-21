@@ -9,7 +9,7 @@ const buttonVariants = cva(
     cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium rounded-lg transition-colors
     focus-visible:outline-none focus:ring-3 focus:ring-primary-200
     disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed
-    [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:pointer-events-none
+    [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:pointer-events-none
   `,
   {
     variants: {
@@ -27,12 +27,39 @@ const buttonVariants = cva(
       },
       size: {
         default: "px-4 py-2",
-        xs: "px-2 py-1 text-xs font-normal gap-1.5 [&_svg]:size-3.5",
-        sm: "py-1.5 px-3 gap-1.5 [&_svg]:size-3.5",
+        xs: "px-2 py-1 text-xs font-normal gap-1.5",
+        sm: "py-1.5 px-3 gap-1.5",
         lg: "px-6 py-2.5",
-        icon: "h-9 w-9",
       },
+      pill: {
+        true: "rounded-full",
+      },
+      iconOnly: {
+        true: 'aspect-square'
+      }
     },
+    compoundVariants: [
+      {
+        iconOnly: true,
+        size: 'xs',
+        class: "[&_svg]:size-4 p-1"
+      },
+      {
+        iconOnly: true,
+        size: 'sm',
+        class: "p-1.5"
+      },
+      {
+        iconOnly: true,
+        size: 'default',
+        class: "p-2"
+      },
+      {
+        iconOnly: true,
+        size: 'lg',
+        class: "p-2.5"
+      }
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",
@@ -43,15 +70,17 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  pill?: boolean
+  iconOnly?: boolean
   asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, pill, iconOnly, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, pill, iconOnly, className }))}
         ref={ref}
         {...props}
       />
