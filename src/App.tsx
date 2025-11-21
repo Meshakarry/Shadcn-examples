@@ -553,14 +553,14 @@ const DashboardShell = () => {
               <div className='flex items-center gap-1.5'>
                 <LanguageDropdown
                   trigger={
-                    <Button variant='ghost' size='icon'>
+                    <Button variant='ghost-muted'>
                       <LanguagesIcon />
                     </Button>
                   }
                 />
                 <ProfileDropdown
                   trigger={
-                    <Button variant='ghost' size='icon' className='size-9.5'>
+                    <Button variant='ghost-muted' className='size-9.5'>
                       <Avatar className='size-9.5 rounded-md'>
                         <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' />
                         <AvatarFallback>JD</AvatarFallback>
@@ -609,8 +609,6 @@ const DashboardShell = () => {
               </Card>
             </div>
 
-            {/* ADD A POSSIBILITY TO HAVE ROUNDED BUTTON AND ICON VARIANT WITH THE SIZES RANGE(xs, sm, default, lg) */}
-
             <div className="my-3 grid gap-8 md:grid-cols-2">
                 {/* Sizes */}
                 <div className="rounded-2xl border p-6 space-y-4">
@@ -639,9 +637,11 @@ const DashboardShell = () => {
                     <Button variant="default">Primary</Button>
                     <Button variant="secondary">Secondary</Button>
                     <Button variant="outline">Outline</Button>
-                    <Button variant="link">Link</Button>
-                    <Button variant="destructive">Destructive</Button>
                     <Button variant="ghost">Ghost</Button>
+                    <Button variant="destructive">Destructive</Button>
+                    <Button variant="ghost-muted">Ghost muted</Button>
+                    <Button variant="link">Link</Button>
+
                   </div>
                 </div>
 
@@ -681,20 +681,25 @@ const DashboardShell = () => {
                     <Button variant="outline" pill>Rounded default</Button>
                     <Button size="lg" variant="outline" pill>Rounded large</Button>
 
-                    <Button size="xs" variant="link" pill>Rounded extra small</Button>
-                    <Button size="sm" variant="link" pill>Rounded small</Button>
-                    <Button variant="link" pill>Rounded default</Button>
-                    <Button size="lg" variant="link" pill>Rounded large</Button>
+                    <Button size="xs" variant="ghost" pill>Rounded extra small</Button>
+                    <Button size="sm" variant="ghost" pill>Rounded small</Button>
+                    <Button variant="ghost" pill>Rounded default</Button>
+                    <Button size="lg" variant="ghost" pill>Rounded large</Button>
 
                     <Button size="xs" variant="destructive" pill>Rounded extra small</Button>
                     <Button size="sm" variant="destructive" pill>Rounded small</Button>
                     <Button variant="destructive" pill>Rounded default</Button>
                     <Button size="lg" variant="destructive" pill>Rounded large</Button>
 
-                    <Button size="xs" variant="ghost" pill>Rounded extra small</Button>
-                    <Button size="sm" variant="ghost" pill>Rounded small</Button>
-                    <Button variant="ghost" pill>Rounded default</Button>
-                    <Button size="lg" variant="ghost" pill>Rounded large</Button>
+                    <Button size="xs" variant="ghost-muted" pill>Rounded extra small</Button>
+                    <Button size="sm" variant="ghost-muted" pill>Rounded small</Button>
+                    <Button variant="ghost-muted" pill>Rounded default</Button>
+                    <Button size="lg" variant="ghost-muted" pill>Rounded large</Button>
+
+                    <Button size="xs" variant="link" pill>Rounded extra small</Button>
+                    <Button size="sm" variant="link" pill>Rounded small</Button>
+                    <Button variant="link" pill>Rounded default</Button>
+                    <Button size="lg" variant="link" pill>Rounded large</Button>
                   </div>
                 </div>
 
@@ -706,9 +711,10 @@ const DashboardShell = () => {
                     <Button variant="default" disabled>Primary</Button>
                     <Button variant="secondary" disabled>Secondary</Button>
                     <Button variant="outline" disabled>Outline</Button>
-                    <Button variant="link" disabled>Link</Button>
-                    <Button variant="destructive" disabled>Destructive</Button>
                     <Button variant="ghost" disabled>Ghost</Button>
+                    <Button variant="destructive" disabled>Destructive</Button>
+                    <Button variant="ghost-muted" disabled>Ghost muted</Button>
+                    <Button variant="link" disabled>Link</Button>
                   </div>
                 </div>
             </div>
@@ -783,7 +789,7 @@ const DashboardShell = () => {
                             <span>Project Name</span>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <Button variant="link">
+                                <Button variant="ghost">
                                   <Info />
                                 </Button>
                               </TooltipTrigger>
@@ -804,7 +810,7 @@ const DashboardShell = () => {
                               <span>Front desk Phone Number</span>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <Button variant="link">
+                                  <Button variant="ghost">
                                     <Info />
                                   </Button>
                                 </TooltipTrigger>
@@ -824,7 +830,7 @@ const DashboardShell = () => {
                               <span>Front desk Email</span>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <Button variant="link">
+                                  <Button variant="ghost">
                                     <Info />
                                   </Button>
                                 </TooltipTrigger>
