@@ -23,7 +23,8 @@ import {
   Search,
   Undo2Icon,
   UsersIcon,
-  Plus
+  Plus,
+  Minus
 } from 'lucide-react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -91,6 +92,10 @@ import StatisticsCard from '@/components/blocks/statistics-card-01'
 import TotalEarningCard from '@/components/blocks/widget-total-earning'
 import TransactionDatatable, { type Item } from '@/components/blocks/datatable-transaction'
 import { Switch } from './components/ui/switch'
+import TooltipLabel from './components/ui/TooltipLabel'
+import MultiSelectCombobox from './components/MultiSelectCombobox'
+import { DropdownMenu } from './components/ui/dropdown-menu'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './components/ui/select'
 
 // Statistics card data
 const StatisticsCardData = [
@@ -386,6 +391,52 @@ const transactionData: Item[] = [
   }
 ]
 
+const frameworks = [
+  {
+    value: "next.js",
+    label: "Next.js",
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+  {
+    value: "vue",
+    label: "Vue",
+  },
+  {
+    value: "vuetify",
+    label: "Vuetify",
+  },
+]
+
+const users = [
+  {
+    value: 'matt-lacey',
+    label: 'Matt Lacey'
+  },
+  {
+    value: 'matt-lacey1',
+    label: 'Matt Lacey1'
+  },
+  {
+    value: 'matt-lacey2',
+    label: 'Matt Lacey2'
+  }
+]
+
 const DashboardShell = () => {
   return (
     <div className='flex min-h-dvh w-full'>
@@ -663,7 +714,7 @@ const DashboardShell = () => {
                 </div>
 
                 <div className="rounded-2xl border p-6 space-y-4">
-                  <h2 className="text-lg font-semibold">Icon only</h2>
+                  <h2 className="text-lg font-semibold">Rounded buttons</h2>
 
                   <div className="flex flex-wrap items-center gap-4">
                     <Button size="xs" pill>Rounded extra small</Button>
@@ -760,9 +811,6 @@ const DashboardShell = () => {
                 <SheetContent>
                   <SheetHeader>
                     <SheetTitle>Add Collaboration</SheetTitle>
-                    {/* <SheetDescription>
-                      Make changes to your profile here. Click save when you&apos;re done.
-                    </SheetDescription> */}
                   </SheetHeader>
                   {/* try to make this globally accessible(this flex-1 wrapper should somehow appears inside SheetBody) */}
                   <div className="flex flex-col gap-3.5 flex-1">
@@ -785,17 +833,7 @@ const DashboardShell = () => {
                         </Field>
 
                         <Field>
-                          <FieldLabel htmlFor="project">
-                            <span>Project Name</span>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="ghost">
-                                  <Info />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>This is content in a tooltip.</TooltipContent>
-                            </Tooltip>
-                          </FieldLabel>
+                          <TooltipLabel label="Project Name" description="This is content in a tooltip." />
 
                           <Input
                             id="project"
@@ -806,17 +844,7 @@ const DashboardShell = () => {
 
                         <FieldGroup className="grid grid-cols-2 gap-6">
                           <Field>
-                            <FieldLabel htmlFor="front-desk-phone">
-                              <span>Front desk Phone Number</span>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button variant="ghost">
-                                    <Info />
-                                  </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>This is content in a tooltip.</TooltipContent>
-                              </Tooltip>
-                            </FieldLabel>
+                            <TooltipLabel label="Front desk Phone Number" description="This is content in a tooltip." />
 
                             <Input
                               id="front-desk-phone"
@@ -826,17 +854,7 @@ const DashboardShell = () => {
                           </Field>
 
                           <Field>
-                            <FieldLabel htmlFor="front-desk-email">
-                              <span>Front desk Email</span>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button variant="ghost">
-                                    <Info />
-                                  </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>This is content in a tooltip.</TooltipContent>
-                              </Tooltip>
-                            </FieldLabel>
+                            <TooltipLabel label="Front desk Email" description="This is content in a tooltip." />
 
                             <Input
                               id="front-desk-email"
@@ -846,6 +864,112 @@ const DashboardShell = () => {
                             />
                           </Field>
                         </FieldGroup>
+
+                        <Field>
+                          <FieldLabel>Category of sector</FieldLabel>
+                          <MultiSelectCombobox options={frameworks} />
+                        </Field>
+
+                        <Field>
+                          <FieldLabel>
+                            Project ID
+                          </FieldLabel>
+
+                          <Input
+                            id="project-id"
+                            placeholder="Project id (CRM)"
+                            required
+                          />
+                        </Field>
+
+                        <FieldGroup className="gap-2">
+                          <TooltipLabel label="Persons" description="This is content in a tooltip." />
+                          <div className="flex flex-col gap-3 -mt-2">
+                            <FieldGroup className="flex-row items-center gap-3">
+                              <Field className="flex-1">
+                                <Input
+                                  id="front-desk-email"
+                                  placeholder="Evil Rabbit"
+                                  required
+                                  className="flex-1 min-h-9"
+                                />
+                              </Field>
+
+                              <div className="flex items-center gap-3">
+                                <Select>
+                                  <SelectTrigger id="person-type">
+                                    <SelectValue placeholder="type" />
+                                  </SelectTrigger>
+
+                                  <SelectContent>
+                                      <SelectItem value="owner">
+                                        Owner
+                                      </SelectItem>
+
+                                      <SelectItem value="organization">
+                                        Organization
+                                      </SelectItem>
+
+                                      <SelectItem value="collaboration">
+                                        Collaboration
+                                      </SelectItem>
+                                  </SelectContent>
+                                </Select>
+
+                                <Button variant="outline" iconOnly pill size="xs" className="shadow-sm">
+                                  <Plus />
+                                </Button>
+                              </div>
+                            </FieldGroup>
+                          </div>
+                        </FieldGroup>
+
+                        <FieldGroup className="gap-2">
+                          <TooltipLabel label="Organisations" description="This is content in a tooltip." />
+                          <div className="flex flex-col gap-3 -mt-2">
+                            <FieldGroup className="flex-row items-center gap-3">
+                              <Field className="flex-1">
+                                <Input
+                                  id="front-desk-email"
+                                  placeholder="Evil rabbit"
+                                  required
+                                  className="flex-1 min-h-9"
+                                />
+                              </Field>
+
+                              <div className="flex items-center gap-3">
+                                <Select>
+                                  <SelectTrigger id="person-type">
+                                    <SelectValue placeholder="type" />
+                                  </SelectTrigger>
+
+                                  <SelectContent>
+                                      <SelectItem value="owner">
+                                        Owner
+                                      </SelectItem>
+
+                                      <SelectItem value="organization">
+                                        Organization
+                                      </SelectItem>
+
+                                      <SelectItem value="collaboration">
+                                        Collaboration
+                                      </SelectItem>
+                                  </SelectContent>
+                                </Select>
+
+                                <Button variant="outline" iconOnly pill size="xs" className="shadow-sm">
+                                  <Minus />
+                                </Button>
+                              </div>
+                            </FieldGroup>
+                          </div>
+                        </FieldGroup>
+
+                        <Field>
+                          <TooltipLabel label="Category of sector" description="Tooltip contentao" />
+                          <MultiSelectCombobox options={users} />
+                        </Field>
                       </FieldGroup>
                     </form>
                   </div>
