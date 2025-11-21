@@ -40,6 +40,7 @@ import { Card } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Badge } from '@/components/ui/badge'
 
 import {
   SidebarProvider,
@@ -620,7 +621,6 @@ const DashboardShell = () => {
                     <Button size="xs">XS</Button>
                     <Button size="sm">SM</Button>
                     <Button size="lg">LG</Button>
-                    <Button size="icon"><Eye /></Button>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-4">
@@ -711,6 +711,29 @@ const DashboardShell = () => {
                     <Button variant="ghost" disabled>Ghost</Button>
                   </div>
                 </div>
+            </div>
+
+            <div className="my-3 grid gap-8 md:grid-cols-2">
+              {/* Variants */}
+              <div className="rounded-2xl border p-6 space-y-4">
+                <h2 className="text-lg font-semibold">Badge variants</h2>
+
+                <div className="flex flex-wrap items-center gap-4">
+                  <Badge variant="default">Primary</Badge>
+                  <Badge variant="secondary">Secondary</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                  <Badge variant="positive">Positive</Badge>
+                  <Badge variant="destructive">Destructive</Badge>
+                  <Badge variant="neutral">Neutral</Badge>
+
+                  <Badge variant="default" pill>Primary</Badge>
+                  <Badge variant="secondary" pill>Secondary</Badge>
+                  <Badge variant="outline" pill>Outline</Badge>
+                  <Badge variant="positive" pill>Positive</Badge>
+                  <Badge variant="destructive" pill>Destructive</Badge>
+                  <Badge variant="neutral" pill>Neutral</Badge>
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center justify-between px-4">
