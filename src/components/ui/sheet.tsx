@@ -29,7 +29,7 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
-  "fixed z-50 flex flex-col gap-6 bg-background p-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out",
+  "fixed z-50 flex flex-col bg-background p-4 pl-2 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out",
   {
     variants: {
       side: {
@@ -38,7 +38,7 @@ const sheetVariants = cva(
           "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
         left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-[35rem]",
         right:
-          "inset-y-0 right-0 h-full w-3/4 border-l border-neutral-200 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-[35rem]",
+          "inset-y-0 right-0 h-full w-3/4 border-l border-border data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-[35rem]",
       },
     },
     defaultVariants: {
@@ -60,6 +60,7 @@ const SheetContent = React.forwardRef<
     <SheetPrimitive.Content
       ref={ref}
       className={cn(sheetVariants({ side }), className)}
+      aria-describedby={undefined}
       {...props}
     >
       <SheetPrimitive.Close className="absolute right-4 top-5 z-1 cursor-pointer transition-opacity focus:outline-none disabled:pointer-events-none data-[state=open]:bg-secondary">
@@ -78,7 +79,7 @@ const SheetHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-2 text-center pb-4 relative sm:text-left after:absolute after:-inset-x-4 after:bottom-0 after:h-px after:bg-neutral-200",
+      "flex flex-col space-y-2 text-center pb-4 relative sm:text-left after:absolute after:-right-4 after:-left-2 after:bottom-0 after:h-px after:bg-border",
       className
     )}
     {...props}
@@ -92,7 +93,8 @@ const SheetFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse pt-4 relative before:absolute before:top-0 before:h-px before:-inset-x-4 before:bg-neutral-200 sm:flex-row sm:justify-end sm:space-x-2",
+      "flex flex-col-reverse pt-4 gap-2 relative sm:flex-row sm:justify-end",
+      "before:absolute before:top-0 before:h-px before:-right-4 before:-left-2 before:bg-border",
       className
     )}
     {...props}

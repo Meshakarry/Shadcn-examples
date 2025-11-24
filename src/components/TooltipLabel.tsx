@@ -9,13 +9,14 @@ import {
 } from "@/components/ui/tooltip"
 
 interface TooltipLabelProps {
+  id?: string
   label: string
   description: string
 }
 
-export default function TooltipLabel ({ label, description }: TooltipLabelProps) {
+export default function TooltipLabel ({ id= "to avoid error(for now)", label, description }: TooltipLabelProps) {
   return (
-    <FieldLabel htmlFor="project">
+    <FieldLabel htmlFor={id}>
       <span>{ label }</span>
       <Tooltip>
         <TooltipTrigger asChild>

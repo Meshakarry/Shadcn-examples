@@ -4,3 +4,21 @@
 @import './plugins.css';
 
 /* @custom-variant dark (&:where(.dark, .dark *)); */
+
+@layer base {
+  ::-webkit-scrollbar-track {
+		@apply bg-transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply bg-border rounded;
+	}
+
+	::-webkit-scrollbar {
+		@apply w-1.5 h-1.5;
+	}
+
+	body {
+		@apply overflow-hidden;
+	}
+}

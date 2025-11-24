@@ -74,8 +74,6 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  pill?: boolean
-  iconOnly?: boolean
   asChild?: boolean
 }
 
