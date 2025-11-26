@@ -90,11 +90,11 @@ const users = [
 ]
 
 export default function DesignSystem () {
-   const [role , setRole] = useState('');
-    const [file , setFile] = useState<File | null>();
-    const addCollaboration = () => {
-      console.log('submitted!!')
-    }
+  const [role , setRole] = useState('');
+  const [file , setFile] = useState<File | null>();
+  const addCollaboration = () => {
+    console.log('submitted!!')
+  }
 
   return (
     <div>
