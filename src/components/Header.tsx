@@ -1,103 +1,60 @@
+import { Settings, History, LogOut } from 'lucide-react';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+
+import { Button } from '@/components/ui/button';
 import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/components/ui/input-group"
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
 
-import { Button } from '@/components/ui/button'
-
-import { PopoverPortal } from '@radix-ui/react-popover'
-import { CircleUserRound, ShoppingCart, ChevronDown, LogOut, Search } from 'lucide-react'
-import { useState } from 'react'
-import HeaderLinks from './HeaderLinks'
-import MobileNav from './MobileNav'
-
-export default function Header () {
-  const [user, setUser] = useState(true);
-
+export default function Header() {
   return (
-    <header className="shadow">
-      <div className="container flex flex-wrap items-center justify-between py-4">
-        <a href="/" className="max-w-36">
-          Here goes the logo..
-        </a>
-
-        <InputGroup className="flex relative order-1 border-0 mt-4 h-10 w-full min-w-72 shadow-none has-[[data-slot=input-group-control]:focus-visible]:ring-0 md:mt-0 md:w-fit md:basis-1/2 md:order-0">
-          <InputGroupInput placeholder="Type to search..." className="border border-[#c2c5e1] rounded-full py-2.5 px-6 h-full" />
-          <InputGroupAddon align="inline-end" className="absolute right-0 py-1 justify-end h-full bg-red-200 rounded-r-full has-[>button]:mr-0 pr-0">
-            <InputGroupButton className="h-full px-3 py-2 [&_svg]:size-6">
-              <Search size={24} className="size-6" />
-            </InputGroupButton>
-          </InputGroupAddon>
-        </InputGroup>
-
-        <div className="hidden md:block">
-          {user ? (
-            <div className="flex gap-4 items-center">
-              <Button size="icon" variant="link" className="h-6 w-6 [&_svg]:size-6" asChild>
-                <a href="/korpa">
-                  <ShoppingCart size={24} />
-                </a>
-              </Button>
-              <Popover>
-                <PopoverTrigger className="flex items-center">
-                  <div className="text-left cursor-pointer pr-2">
-                    <span className="block text-sm text-gray-300">Pozdrav,</span>
-                    <span className="block text-red-300">Indevitus</span>
-                  </div>
-                  <div className="flex h-full cursor-pointer justify-center">
-                    <ChevronDown size={24} className="text-gray-300"/>
-                  </div>
-                </PopoverTrigger>
-                <PopoverPortal>
-                  <PopoverContent className="PopoverContent max-w-fit rounded-md border-black/10 bg-white shadow my-2.5">
-                    <ul>
-                      <li className="py-2.5 user-select-none">
-                        <a href="/page-1" className="flex items-center gap-1 lg:gap-2.5">
-                          <CircleUserRound size={24} />
-                          <span className="text-base leading-4 text-blue-300">Moj profil</span>
-                        </a>
-                      </li>
-
-                      <li className="py-2.5">
-                        <a href="/page-2" className="flex items-center gap-1 lg:gap-2.5">
-                          <LogOut size={24} />
-                          <span className="text-base leading-4 text-blue-300">Odjava</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </PopoverContent>
-                </PopoverPortal>
-              </Popover>
+    <header className="fixed z-50 w-full top-0 px-4 py-3 border-b border-border bg-background md:w-[calc(100%-var(--sidebar-width))]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <SidebarTrigger className="md:hidden" />
+              {/* this should be dynamic somehow */}
+              <h4>Dashboard</h4>
             </div>
-          ): (
-            <Button variant="link" asChild className="h-6 p-0 [&_svg]:size-6">
-              <a href="/prijava">
-                <CircleUserRound size={24} />
-                <span className="text-base leading-4">Prijava</span>
-              </a>
-            </Button>
-          )}
-        </div>
 
-        <div className="flex gap-2 md:hidden">
-          <Button size="icon" variant="link" className="h-6 w-6 [&_svg]:size-6" asChild>
-            <a href="/korpa">
-              <ShoppingCart size={24} />
-            </a>
-          </Button>
+            <div className="flex items-center gap-3">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm">HAZIDEX catalogue</Button>
+                </DropdownMenuTrigger>
 
-          <MobileNav  />
-        </div>
-      </div>
+                <DropdownMenuContent className="w-60" align="start">
+                  <DropdownMenuItem>
+                    <Settings />
+                    User Settings
+                  </DropdownMenuItem>
 
-      <HeaderLinks className="hidden md:block" />
-  </header>
+                  <DropdownMenuItem>
+                    <History />
+                    Request History
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem>
+                    <LogOut />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </div>
+          </div>
+        </header>
   )
 }

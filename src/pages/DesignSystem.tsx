@@ -97,7 +97,7 @@ export default function DesignSystem () {
     }
 
   return (
-    <div className="pb-64">
+    <div>
       <div className="my-3 grid gap-8 md:grid-cols-2">
                {/* Sizes */}
         <div className="rounded-2xl border p-6 space-y-4">
