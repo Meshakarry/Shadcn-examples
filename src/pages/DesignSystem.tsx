@@ -27,6 +27,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetBody,
 } from "@/components/ui/sheet"
 
 import {
@@ -285,8 +286,7 @@ export default function DesignSystem () {
             <SheetHeader>
               <SheetTitle>Add Collaboration</SheetTitle>
             </SheetHeader>
-            {/* try to make this globally accessible(this flex-1 wrapper should somehow appears inside SheetBody) */}
-            <div className="flex flex-col gap-3.5 flex-1 overflow-y-auto overflow-x-hidden px-2 py-6">
+            <SheetBody>
               <div>
                 <h4 className="mb-4 font-bold text-xl leading-tight">Add new Collaboration</h4>
                 <p className="text-neutral-600 text-sm">
@@ -450,7 +450,7 @@ export default function DesignSystem () {
 
                 </FieldGroup>
               </form>
-            </div>
+            </SheetBody>
             <SheetFooter>
               <SheetClose asChild>
                 <Button variant="outline">
@@ -485,8 +485,7 @@ export default function DesignSystem () {
             <SheetHeader>
               <SheetTitle>Add User</SheetTitle>
             </SheetHeader>
-            {/* try to make this globally accessible(this flex-1 wrapper should somehow appears inside SheetBody) */}
-            <div className="flex flex-col gap-3.5 flex-1 overflow-y-auto overflow-x-hidden px-2 py-6">
+            <SheetBody>
               <div>
                 <h4 className="mb-4 font-bold text-xl leading-tight">Register a New User</h4>
                 <p className="text-neutral-600 text-sm">
@@ -577,7 +576,7 @@ export default function DesignSystem () {
 
                 </FieldGroup>
               </form>
-            </div>
+            </SheetBody>
             <SheetFooter>
               <SheetClose asChild>
                 <Button variant="outline">
